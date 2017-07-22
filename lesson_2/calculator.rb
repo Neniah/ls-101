@@ -1,10 +1,6 @@
 
 def valid_number?(number)
-  if number > 0
-    return true
-  else
-    return false
-  end
+  number > 0 ? true : false
 end
 
 number1 = ''
@@ -26,32 +22,31 @@ def asking_number2
 end
 
 loop do
-asking_number1
-asking_number2
+  asking_number1
+  asking_number2
 
-puts "Choose operation: sum('sm'), subtract('sb'), multiply('m'), division(d):"
-puts "Press 's' for exit."
-operation = gets.chomp
+  puts "Choose operation: sum('sm'), subtract('sb'), multiply('m'), division(d):"
+  puts "Press 's' for exit."
+  operation = gets.chomp
 
-case operation
-when 'sm'
-  total = number1 + number2
-  puts "The sum is: #{total}"
-when 'sb'
-  total = number1 - number2
-  puts "The subtract is: #{total}"
-when 'm'
-  total = number1 * number2
-  puts "The multiply is: #{total}"
-when 'd'
-  total = number1.to_f / number2.to_f
-  puts "The division is: #{total}"
-when 's'
-  break
-else
-  puts "Sorry, we don't have that option."
-end
+  case operation
+  when 'sm'
+    total = number1 + number2
+    puts "The sum is: #{total}"
+  when 'sb'
+    total = number1 - number2
+    puts "The subtract is: #{total}"
+  when 'm'
+    total = number1 * number2
+    puts "The multiply is: #{total}"
+  when 'd'
+    total = number1.to_f / number2.to_f
+    puts "The division is: #{total}"
+  when 's'
+    break
+  else
+    puts "Sorry, we don't have that option."
+  end
 
-break if operation == 's'
-
+  break if operation == 's'
 end
