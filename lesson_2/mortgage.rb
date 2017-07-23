@@ -7,9 +7,7 @@ amount = ''
 interest_rate = ''
 years = ''
 
-
 loop do
-
   loop do
     puts 'Enter the loan amount:'
     amount = gets.chomp.to_f
@@ -32,8 +30,8 @@ loop do
   monthly_interest_rate = annual_interest_rate / 12
   months = years.to_i * 12
 
-  monthly_payment = amount * ( monthly_interest_rate /
-  (1 - ( 1 + monthly_interest_rate)**(-months.to_i) ) )
+  monthly_payment = amount * (monthly_interest_rate /
+  (1 - (1 + monthly_interest_rate)**-months.to_i))
 
   puts("Your monthly payment is: #{format('%02.2f', monthly_payment)}")
 
