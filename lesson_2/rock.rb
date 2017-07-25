@@ -1,13 +1,13 @@
 options = %w[rock paper scissors]
+user_win = 0
+computer_win = 0
 
 def asking_user
-  # the use makes a choice
   puts "What is your option? rock'1', paper'2', scissors'3'"
   gets.chomp.to_i
 end
 
 def asking_computer
-  # the computer makes a choice
   rand(1..3)
 end
 
@@ -23,8 +23,11 @@ def test_method(user, computer)
   end
 end
 
-user_option = asking_user
-computer_option = asking_computer
-puts "User -> #{options[user_option.to_i - 1]}"
-puts "Computer -> #{options[computer_option - 1]}"
-test_method(user_option, computer_option)
+
+loop do
+  user_option = asking_user
+  computer_option = asking_computer
+  puts "User -> #{options[user_option.to_i - 1]}"
+  puts "Computer -> #{options[computer_option - 1]}"
+  test_method(user_option, computer_option)
+end
