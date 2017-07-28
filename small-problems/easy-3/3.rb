@@ -4,5 +4,5 @@ end
 
 prompt("Please write word or multiple words: ")
 sentence = gets.chomp
-len = sentence.length
+len = sentence.delete(' ').size
 prompt("There are #{len} characters in '#{sentence}'")
