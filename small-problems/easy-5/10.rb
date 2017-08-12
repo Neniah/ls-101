@@ -1,5 +1,5 @@
 def print_in_box(text)
-  len = text.size
+  len = text.size    
   puts "+-" + ('-' * len) + '-+'
   puts "| " + (' ' * len) + ' |'
   puts "| #{text} |"
