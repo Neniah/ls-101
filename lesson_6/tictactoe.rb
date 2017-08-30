@@ -6,7 +6,7 @@ COMPUTER_MARKER = 'O'
 
 def display_board(brd)
   system 'clear'
-  puts ""
+  puts "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts "    |    |    "
   puts " #{brd[1]}  | #{brd[2]}  | #{brd[3]}   "
   puts "    |    |    "
@@ -23,13 +23,12 @@ end
 
 def initialize_board
   new_board = {}
-  (1..9).each {|num| new_board[num] = INITIAL_MARKER}
+  (1..9).each { |num| new_board[num] = INITIAL_MARKER }
   new_board
 end
 
 def empty_squares(brd)
-  #binding.pry
-  brd.keys.select {|number| brd[number] == INITIAL_MARKER}
+  brd.keys.select { |number| brd[number] == INITIAL_MARKER }
 end
 
 def player_places_piece!(brd)
@@ -55,18 +54,52 @@ def board_full?(brd)
 end
 
 def someone_won?(brd)
-  false
+  !!detect_winner(brd)
 end
 
-board = initialize_board
-display_board(board)
+def detect_winner(brd)
+  winning_lines = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] +
+                  [[1, 4, 7], [2, 5, 8], [3, 6, 9]] +
+                  [[1, 5, 9], [3, 5, 7]]
+  winning_lines.each do |line|
+    if brd[line[0]] == PLAYER_MARKER &&
+       brd[line[1]] == PLAYER_MARKER &&
+       brd[line[2]] == PLAYER_MARKER
+        return 'Player'
+    elsif brd[line[0]] == PLAYER_MARKER &&
+          brd[line[1]] == PLAYER_MARKER &&
+          brd[line[2]] == PLAYER_MARKER
+            return 'Computer'
+    end
+  end
+  nil
+end
 
 loop do
-  player_places_piece!(board)
-  computer_places_piece!(board)
-  puts empty_squares(board)
-  display_board(board)
-  break if someone_won?(board) || board_full?(board)
-end
+  board = initialize_board
 
-display_board(board)
+  loop do
+    display_board(board)
+
+    player_places_piece!(board)
+    break if someone_won?(board) || board_full?(board)
+
+    computer_places_piece!(board)
+    break if someone_won?(board) || board_full?(board)
+  end
+
+  display_board(board)
+
+  if someone_won?(board)
+    puts "#{detect_winner(board)} won!"
+  else
+    puts "It's a tie!"
+  end
+
+  puts "Play again? (y or n)"
+  answer = gets.chomp
+  break unless answer.downcase.start_with?('y')
+end
+#display_board(board)
+
+puts "Thanks for playing Tic Tac Toc. Good bye!"
